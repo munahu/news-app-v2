@@ -1,43 +1,14 @@
 import { Category, categories } from "./categories";
 import Layout from "./components/Layout";
 import Image from "next/image";
-
-interface Article {
-  source: { id: string; name: string };
-  title: string;
-  description: string;
-  url: string;
-  urlToImage: string;
-}
+import { fetchArticles } from "./layout";
 
 interface PreviewCategoryProps {
   category: Category;
 }
 
-async function fetchArticles(category: Category, amount: string) {
-  const res = await fetch(
-    `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${process.env.NEWS_API_KEY}&pageSize=${amount}`
-  );
-
-  const data = await res.json();
-
-  const articles: Article[] = data.articles;
-
-  const filteredArticles = articles.filter(
-    (article) =>
-      article.title &&
-      article.source.name &&
-      article.description &&
-      article.url &&
-      article.urlToImage
-  );
-
-  return filteredArticles.slice(0, 3);
-}
-
 async function PreviewCategory({ category }: PreviewCategoryProps) {
-  const articles = await fetchArticles(category, "10");
-
+  const articles = (await fetchArticles(category, "10")).slice(0, 3);
   return (
     <li>
       <span>{category}</span>
