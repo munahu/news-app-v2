@@ -1,22 +1,39 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { Category } from "./categories";
+import localFont from "next/font/local";
 
-interface Article {
-  source: { id: string; name: string };
+export interface ArticleStructure {
   title: string;
   description: string;
   url: string;
   urlToImage: string;
 }
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
   title: "MH News",
   description: "Get the latest news.",
 };
+
+const satoshi = localFont({
+  src: [
+    {
+      path: "./fonts/Satoshi-Regular.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Satoshi-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Satoshi-Black.woff2",
+      weight: "900",
+      style: "normal",
+    },
+  ],
+});
 
 export async function fetchArticles(category: Category, amount: string) {
   const res = await fetch(
@@ -25,15 +42,11 @@ export async function fetchArticles(category: Category, amount: string) {
 
   const data = await res.json();
 
-  const articles: Article[] = data.articles;
+  const articles: ArticleStructure[] = data.articles;
 
   const filteredArticles = articles.filter(
     (article) =>
-      article.title &&
-      article.source.name &&
-      article.description &&
-      article.url &&
-      article.urlToImage
+      article.title && article.description && article.url && article.urlToImage
   );
 
   return filteredArticles;
@@ -46,7 +59,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} flex justify-center`}>
+      <body className={`${satoshi.className} flex justify-center`}>
         {children}
       </body>
     </html>
