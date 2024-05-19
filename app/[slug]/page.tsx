@@ -12,7 +12,7 @@ export default async function Page({ params }: { params: { slug: Category } }) {
     return (
       <Layout heading={params.slug}>
         <>
-          <ul className="grid grid-cols-1 md:grid-cols-3 mt-8 mb-24 border-b border-dotted border-neutral-400">
+          <ul className="grid grid-cols-1 md:grid-cols-3 mb-24 border-b border-dotted border-neutral-400">
             <Article article={firstThree[0]} isTopArticle isTopSectionArticle />
             <div className="flex flex-col">
               <Article article={firstThree[1]} isTopSectionArticle />

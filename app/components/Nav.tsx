@@ -16,7 +16,7 @@ export default function Nav({ heading }: Props) {
   const [isMobileNavDisplayed, setIsMobileNavDisplayed] = useState(false);
 
   return (
-    <nav className="border-b border-black flex sm:flex-col justify-center items-center mt-8 pb-3 sm:pb-2">
+    <nav className="fixed md:static top-0 left-0 right-0 pt-8 pb-3 sm:pb-2 bg-white border-b border-black flex sm:flex-col justify-center items-center z-50">
       {isMobileNavDisplayed ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,17 @@ export default function Nav({ heading }: Props) {
 
 function MobileNav({ heading }: MobileNavProps) {
   return (
-    <ul className="bg-white top-20 left-0 right-0 fixed flex flex-col sm:hidden">
+    <ul className="pb-8 bg-white top-20 left-0 right-0 fixed flex flex-col sm:hidden">
+      {heading !== "news" && (
+        <li>
+          <Link
+            href="/"
+            className="block pl-8 py-3 text-lg opacity-90 font-bold uppercase border-b border-neutral-300"
+          >
+            Home
+          </Link>
+        </li>
+      )}
       {categories.map(
         (category, index) =>
           heading !== category && (

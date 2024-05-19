@@ -49,7 +49,7 @@ async function PreviewCategory({ category }: PreviewCategoryProps) {
 export default async function Home() {
   return (
     <Layout heading="news">
-      <ul className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-x-7 gap-y-20">
+      <ul className="grid grid-cols-1 md:grid-cols-3 gap-x-7 gap-y-20 mt-32 sm:mt-44 md:mt-12 mb-16">
         {categories.map((category, index) => (
           <PreviewCategory key={index} category={category} />
         ))}
