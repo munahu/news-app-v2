@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArticleStructure } from "../layout";
+import { ArticleStructure } from "@/app/actions";
 
 interface Props {
   isTopArticle?: boolean;

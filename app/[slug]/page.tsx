@@ -1,6 +1,6 @@
 import { Category, categories } from "../categories";
 import Layout from "../components/Layout";
-import { fetchArticles } from "../layout";
+import { fetchArticles } from "@/app/actions";
 import { notFound } from "next/navigation";
 import Article from "../components/Article";
 

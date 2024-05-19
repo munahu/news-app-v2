@@ -2,7 +2,7 @@ import { Category, categories } from "./categories";
 import Layout from "./components/Layout";
 import Link from "next/link";
 import Image from "next/image";
-import { fetchArticles } from "@/app/layout";
+import { fetchArticles } from "@/app/actions";
 
 interface PreviewCategoryProps {
   category: Category;

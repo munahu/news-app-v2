@@ -1,14 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Category } from "./categories";
 import localFont from "next/font/local";
-
-export interface ArticleStructure {
-  title: string;
-  description: string;
-  url: string;
-  urlToImage: string;
-}
 
 export const metadata: Metadata = {
   title: "MH News",
@@ -34,23 +26,6 @@ const satoshi = localFont({
     },
   ],
 });
-
-export async function fetchArticles(category: Category, amount: string) {
-  const res = await fetch(
-    `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${process.env.NEWS_API_KEY}&pageSize=${amount}`
-  );
-
-  const data = await res.json();
-
-  const articles: ArticleStructure[] = data.articles;
-
-  const filteredArticles = articles.filter(
-    (article) =>
-      article.title && article.description && article.url && article.urlToImage
-  );
-
-  return filteredArticles;
-}
 
 export default function RootLayout({
   children,
