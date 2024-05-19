@@ -1,14 +1,16 @@
 export type Category =
   | "business"
-  | "entertainment"
+  | "culture"
   | "science"
   | "sports"
-  | "technology";
+  | "tech"
+  | "health";
 
 export const categories: Category[] = [
   "business",
-  "entertainment",
+  "culture",
   "science",
   "sports",
-  "technology",
+  "tech",
+  "health",
 ];

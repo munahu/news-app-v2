@@ -8,8 +8,15 @@ export interface ArticleStructure {
 }
 
 export async function fetchArticles(category: Category, amount: string) {
+  const actualCategoryName =
+    category === "tech"
+      ? "technology"
+      : category === "culture"
+      ? "entertainment"
+      : category;
+
   const res = await fetch(
-    `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${process.env.NEWS_API_KEY}&pageSize=${amount}`
+    `https://newsapi.org/v2/top-headlines?country=us&category=${actualCategoryName}&apiKey=${process.env.NEWS_API_KEY}&pageSize=${amount}`
   );
 
   const data = await res.json();

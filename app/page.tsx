@@ -1,5 +1,4 @@
 import { Category, categories } from "./categories";
-import Layout from "./components/Layout";
 import Link from "next/link";
 import Image from "next/image";
 import { fetchArticles } from "@/app/actions";
@@ -9,38 +8,30 @@ interface PreviewCategoryProps {
 }
 
 async function PreviewCategory({ category }: PreviewCategoryProps) {
-  const articles = (await fetchArticles(category, "10")).slice(0, 3);
+  const articles = (await fetchArticles(category, "10")).slice(0, 1);
+
   return (
-    <li className="relative cursor-pointer">
-      <Link
-        href={`/${category}`}
-        className="absolute -top-6 left-0 bg-black text-white text-sm px-3 py-2 font-light capitalize"
-      >
-        {category}
-      </Link>
+    <li className="relative cursor-pointer group">
       {articles &&
         articles.map((article, index) => (
-          <div key={index} className="py-3 border-b border-black">
+          <Link key={index} href={`/${category}`} className="relative">
             {index === 0 && (
-              <a key={index} href={article.url} target="_blank">
+              <>
+                <span className="absolute left-2 bottom-6 text-white text-5xl md:text-6xl lg:text-7xl capitalize font-semibold -tracking-[0.04em] font-sans z-40 opacity-65 group-hover:opacity-100">
+                  {category}
+                </span>
+
                 <Image
                   alt={article.title}
                   src={article.urlToImage}
                   width={1200}
-                  height={1150}
-                  className="max-w-full h-auto max-h-[384px] md:max-h-[163px] object-cover mb-5"
+                  height={8250}
+                  className="h-full object-cover brightness-50 tracking-wider"
+                  priority
                 />
-              </a>
+              </>
             )}
-            <a
-              key={index}
-              href={article.url}
-              target="_blank"
-              className="font-bold"
-            >
-              {article.title}
-            </a>
-          </div>
+          </Link>
         ))}
     </li>
   );
@@ -48,12 +39,10 @@ async function PreviewCategory({ category }: PreviewCategoryProps) {
 
 export default async function Home() {
   return (
-    <Layout heading="news">
-      <ul className="grid grid-cols-1 md:grid-cols-3 gap-x-7 gap-y-20 mt-32 sm:mt-44 md:mt-12 mb-16">
-        {categories.map((category, index) => (
-          <PreviewCategory key={index} category={category} />
-        ))}
-      </ul>
-    </Layout>
+    <ul className="h-screen relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+      {categories.map((category, index) => (
+        <PreviewCategory key={index} category={category} />
+      ))}
+    </ul>
   );
 }
