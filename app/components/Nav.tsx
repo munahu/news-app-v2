@@ -16,7 +16,7 @@ export default function Nav({ heading }: Props) {
   const [isMobileNavDisplayed, setIsMobileNavDisplayed] = useState(false);
 
   return (
-    <nav className="fixed md:static top-0 left-0 right-0 pt-8 pb-3 sm:pb-2 bg-white border-b border-black flex sm:flex-col justify-center items-center z-50">
+    <nav className="font-sans flex justify-between items-center pt-6">
       {isMobileNavDisplayed ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,7 @@ export default function Nav({ heading }: Props) {
           />
         </svg>
       )}
-      <h1 className="mb-0 sm:mb-6 text-3xl sm:text-4xl font-black uppercase">
+      <h1 className="font-semibold text-2xl">
         {heading === "home" ? "news" : heading}
       </h1>
       {isMobileNavDisplayed && <MobileNav heading={heading} />}
@@ -58,7 +58,7 @@ export default function Nav({ heading }: Props) {
         <li>
           <Link
             href="/"
-            className="p-2 ml-4 text-sm opacity-90 font-medium uppercase cursor-pointer"
+            className="p-2 ml-4 text-sm opacity-90 font-light uppercase cursor-pointer"
           >
             Home
           </Link>
@@ -67,7 +67,7 @@ export default function Nav({ heading }: Props) {
           <li key={index}>
             <Link
               href={category}
-              className="p-2 ml-4 text-sm opacity-90 font-medium uppercase cursor-pointer"
+              className="p-2 ml-4 text-sm opacity-90 font-light uppercase cursor-pointer"
             >
               {category}
             </Link>

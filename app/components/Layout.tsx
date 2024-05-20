@@ -9,7 +9,7 @@ export default function Layout({ children, heading }: Props) {
   return (
     <div className="max-w-screen-2xl md:px-12">
       <Nav heading={heading} />
-      <main className="px-4 md:px-0 mt-24 sm:mt-36 md:mt-8">{children}</main>
+      <main className="px-4 md:px-0">{children}</main>
     </div>
   );
 }
