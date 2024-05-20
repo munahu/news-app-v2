@@ -24,7 +24,7 @@ export default function Nav({ heading }: Props) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="absolute left-8 sm:hidden w-7 h-7 cursor-pointer"
+          className="absolute right-8 lg:hidden w-7 h-7 cursor-pointer z-50"
           onClick={() => setIsMobileNavDisplayed(false)}
         >
           <path
@@ -40,7 +40,7 @@ export default function Nav({ heading }: Props) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="absolute left-8 sm:hidden w-7 h-7 cursor-pointer"
+          className="absolute right-8 lg:hidden w-7 h-7 cursor-pointer"
           onClick={() => setIsMobileNavDisplayed(true)}
         >
           <path
@@ -54,7 +54,7 @@ export default function Nav({ heading }: Props) {
         {heading === "home" ? "news" : heading}
       </h1>
       {isMobileNavDisplayed && <MobileNav heading={heading} />}
-      <ul className="hidden sm:flex">
+      <ul className="hidden lg:flex">
         <li>
           <Link
             href="/"
@@ -80,14 +80,14 @@ export default function Nav({ heading }: Props) {
 
 function MobileNav({ heading }: MobileNavProps) {
   return (
-    <ul className="pb-8 bg-white top-20 left-0 right-0 fixed flex flex-col sm:hidden">
+    <ul className="flex lg:hidden flex-col absolute bg-neutral-900 inset-0 pt-20 pl-14 md:pl-20 tracking-tighter z-40">
       {heading !== "news" && (
         <li>
           <Link
             href="/"
-            className="block pl-8 py-3 text-lg opacity-90 font-bold uppercase border-b border-neutral-300"
+            className="text-4xl md:text-5xl capitalize hover:border-b-8 border-red-900 py-4 flex items-center"
           >
-            Home
+            home
           </Link>
         </li>
       )}
@@ -97,7 +97,7 @@ function MobileNav({ heading }: MobileNavProps) {
             <li key={index}>
               <Link
                 href={category}
-                className="block pl-8 py-3 text-lg opacity-90 font-bold uppercase border-b border-neutral-300"
+                className="text-4xl md:text-5xl capitalize hover:border-b-8 border-red-900 py-4 flex items-center"
               >
                 {category}
               </Link>
