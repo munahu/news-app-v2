@@ -85,7 +85,7 @@ function MobileNav({ heading }: MobileNavProps) {
         <li>
           <Link
             href="/"
-            className="text-4xl md:text-5xl capitalize hover:border-b-8 border-red-900 py-4 flex items-center"
+            className="text-2xl uppercase py-4 flex items-center hover:line-through"
           >
             home
           </Link>
@@ -95,7 +95,7 @@ function MobileNav({ heading }: MobileNavProps) {
         <li key={index}>
           <Link
             href={`/${category}`}
-            className="text-4xl md:text-5xl capitalize hover:border-b-8 border-red-900 py-4 flex items-center"
+            className="text-2xl uppercase py-4 flex items-center hover:line-through"
           >
             {category}
           </Link>
