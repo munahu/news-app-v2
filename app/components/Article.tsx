@@ -13,7 +13,14 @@ interface Props {
 export default function Article({ article, category }: Props) {
   const router = useRouter();
   const handleClick = () => {
-    localStorage.setItem("article", JSON.stringify(article));
+    const storedViewedArticles = localStorage.getItem("articles");
+    if (storedViewedArticles) {
+      const articlesViewed = JSON.parse(storedViewedArticles);
+      articlesViewed.push(article);
+      localStorage.setItem("articles", JSON.stringify(articlesViewed));
+    } else {
+      localStorage.setItem("articles", JSON.stringify([article]));
+    }
     router.push(`/${category}/${article.id}`);
   };
   return (

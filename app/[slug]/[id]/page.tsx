@@ -17,8 +17,11 @@ export default function Page({
 }: {
   params: { id: string; slug: string };
 }) {
-  const storedArticle = localStorage.getItem("article");
-  const article: ArticleStructure = storedArticle && JSON.parse(storedArticle);
+  const storedViewedArticles = String(localStorage.getItem("articles"));
+  const viewedArticles = JSON.parse(storedViewedArticles);
+  const article: ArticleStructure = viewedArticles.find(
+    (article: ArticleStructure) => article.id === params.id
+  );
 
   if (article.id === params.id) {
     return (
