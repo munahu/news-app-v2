@@ -5,13 +5,15 @@ import { notFound } from "next/navigation";
 import Article from "../components/Article";
 
 export default async function Page({ params }: { params: { slug: Category } }) {
-  if (categories.includes(params.slug)) {
-    const articles = await fetchArticles(params.slug, "20");
+  const category = params.slug;
+  if (categories.includes(category)) {
+    const articles = await fetchArticles(category, "20");
+
     return (
-      <Layout heading={params.slug}>
+      <Layout heading={category}>
         <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
           {articles.map((article, index) => (
-            <Article key={index} article={article} />
+            <Article key={index} article={article} category={category} />
           ))}
         </ul>
       </Layout>

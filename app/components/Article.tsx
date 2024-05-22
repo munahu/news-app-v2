@@ -2,31 +2,29 @@
 
 import Image from "next/image";
 import { ArticleStructure } from "@/app/actions";
+import { useRouter } from "next/navigation";
+import { Category } from "../categories";
 
 interface Props {
   article: ArticleStructure;
+  category: Category;
 }
 
-export default function Article({
-  article: { urlToImage, url, title },
-}: Props) {
+export default function Article({ article, category }: Props) {
+  const router = useRouter();
+  const handleClick = () => {
+    localStorage.setItem("article", JSON.stringify(article));
+    router.push(`/${category}/${article.id}`);
+  };
   return (
-    <li
-      className="group cursor-pointer"
-      onClick={() => window.open(url, "_blank")}
-    >
+    <li className="group cursor-pointer" onClick={() => handleClick()}>
       <Image
-        alt={title}
-        src={urlToImage}
+        alt={article.title}
+        src={article.urlToImage}
         width={1200}
         height={550}
         className="h-full object-cover brightness-50 group-hover:brightness-100"
       />
-      <div className="hidden">
-        <p className="text-xl md:text-[19px] leading-7 font-bold my-3">
-          {title}
-        </p>
-      </div>
     </li>
   );
 }

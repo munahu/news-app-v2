@@ -50,9 +50,9 @@ export default function Nav({ heading }: Props) {
           />
         </svg>
       )}
-      <h1 className="font-semibold text-2xl">
+      <Link className="font-semibold text-2xl" href={`/${heading}`}>
         {heading === "home" ? "news" : heading}
-      </h1>
+      </Link>
       {isMobileNavDisplayed && <MobileNav heading={heading} />}
       <ul className="hidden lg:flex">
         <li>
@@ -66,7 +66,7 @@ export default function Nav({ heading }: Props) {
         {categories.map((category, index) => (
           <li key={index}>
             <Link
-              href={category}
+              href={`/${category}`}
               className="p-2 ml-4 text-sm opacity-90 font-light uppercase cursor-pointer"
             >
               {category}
@@ -91,19 +91,16 @@ function MobileNav({ heading }: MobileNavProps) {
           </Link>
         </li>
       )}
-      {categories.map(
-        (category, index) =>
-          heading !== category && (
-            <li key={index}>
-              <Link
-                href={category}
-                className="text-4xl md:text-5xl capitalize hover:border-b-8 border-red-900 py-4 flex items-center"
-              >
-                {category}
-              </Link>
-            </li>
-          )
-      )}
+      {categories.map((category, index) => (
+        <li key={index}>
+          <Link
+            href={`/${category}`}
+            className="text-4xl md:text-5xl capitalize hover:border-b-8 border-red-900 py-4 flex items-center"
+          >
+            {category}
+          </Link>
+        </li>
+      ))}
     </ul>
   );
 }

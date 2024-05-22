@@ -1,10 +1,13 @@
 import { Category } from "./categories";
+import { v4 as uuidv4 } from "uuid";
 
 export interface ArticleStructure {
+  id: string;
   title: string;
   description: string;
   url: string;
   urlToImage: string;
+  content: string;
 }
 
 export async function fetchArticles(category: Category, amount: string) {
@@ -23,9 +26,15 @@ export async function fetchArticles(category: Category, amount: string) {
 
   const articles: ArticleStructure[] = data.articles;
 
+  articles.map((article) => (article.id = uuidv4()));
+
   const filteredArticles = articles.filter(
     (article) =>
-      article.title && article.description && article.url && article.urlToImage
+      article.title &&
+      article.description &&
+      article.url &&
+      article.urlToImage &&
+      article.content
   );
 
   return filteredArticles;
