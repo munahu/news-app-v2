@@ -7,7 +7,6 @@ export interface ArticleStructure {
   description: string;
   url: string;
   urlToImage: string;
-  content: string;
 }
 
 export async function fetchArticles(category: Category, amount: string) {
@@ -30,11 +29,7 @@ export async function fetchArticles(category: Category, amount: string) {
 
   const filteredArticles = articles.filter(
     (article) =>
-      article.title &&
-      article.description &&
-      article.url &&
-      article.urlToImage &&
-      article.content
+      article.title && article.description && article.url && article.urlToImage
   );
 
   return filteredArticles;
