@@ -1,3 +1,4 @@
+import { unstable_noStore as noStore } from "next/cache";
 import { Category } from "./categories";
 import { v4 as uuidv4 } from "uuid";
 
@@ -17,6 +18,7 @@ export async function fetchArticles(category: Category, amount: string) {
       ? "entertainment"
       : category;
 
+  noStore();
   const res = await fetch(
     `https://newsapi.org/v2/top-headlines?country=us&category=${actualCategoryName}&apiKey=${process.env.NEWS_API_KEY}&pageSize=${amount}`
   );
