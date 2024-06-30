@@ -26,6 +26,7 @@ async function PreviewCategory({ category }: PreviewCategoryProps) {
                   width={1200}
                   height={550}
                   className="h-full w-full object-cover brightness-50 group-hover:brightness-75 tracking-wider"
+                  priority
                 />
               </>
             )}

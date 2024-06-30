@@ -31,7 +31,7 @@ export default function Page({
           src={article.urlToImage}
           width={1200}
           height={550}
-          className="h-full object-cover blur-[100px] brightness-50 absolute"
+          className="h-full object-cover blur-[100px] brightness-50 absolute -z-10"
         />
         <Layout heading={params.slug}>
           <div className="relative h-screen">
