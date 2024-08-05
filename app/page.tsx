@@ -1,24 +1,24 @@
-import { Category, categories } from "./categories";
+import { CategoryName, categoryNames } from "./categories";
 import Link from "next/link";
 import Image from "next/image";
 import { fetchArticles } from "@/app/actions";
 
 interface PreviewCategoryProps {
-  category: Category;
+  categoryName: CategoryName;
 }
 
-async function PreviewCategory({ category }: PreviewCategoryProps) {
-  const articles = (await fetchArticles(category, "10")).slice(0, 1);
+async function PreviewCategory({ categoryName }: PreviewCategoryProps) {
+  const articles = await fetchArticles(categoryName, "1");
 
   return (
     <li className="relative cursor-pointer group">
       {articles &&
         articles.map((article, index) => (
-          <Link key={index} href={`/${category}`}>
+          <Link key={index} href={`/${categoryName}`}>
             {index === 0 && (
               <>
                 <span className="absolute left-4 lg:left-7 bottom-3 text-white text-5xl md:text-6xl lg:text-7xl capitalize font-semibold -tracking-[0.04em] font-sans z-40 opacity-65 group-hover:opacity-100">
-                  {category}
+                  {categoryName}
                 </span>
                 <Image
                   alt={article.title}
@@ -39,8 +39,8 @@ async function PreviewCategory({ category }: PreviewCategoryProps) {
 export default async function Home() {
   return (
     <ul className="h-screen grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-      {categories.map((category, index) => (
-        <PreviewCategory key={index} category={category} />
+      {categoryNames.map((categoryName, index) => (
+        <PreviewCategory key={index} categoryName={categoryName} />
       ))}
     </ul>
   );

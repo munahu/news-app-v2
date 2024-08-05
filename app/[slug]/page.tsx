@@ -1,19 +1,27 @@
-import { Category, categories } from "../categories";
-import Layout from "../components/Layout";
+import Layout from "@/app/components/Layout";
 import { fetchArticles } from "@/app/actions";
 import { notFound } from "next/navigation";
-import Article from "../components/Article";
+import Article from "@/app/components/Article";
+import { CategoryName, categoryNames } from "@/app/categories";
 
-export default async function Page({ params }: { params: { slug: Category } }) {
-  const category = params.slug;
-  if (categories.includes(category)) {
-    const articles = await fetchArticles(category, "20");
+export default async function Page({
+  params,
+}: {
+  params: { slug: CategoryName };
+}) {
+  const categoryName = params.slug;
+  if (categoryNames.includes(categoryName)) {
+    const articles = await fetchArticles(categoryName, "20");
 
     return (
-      <Layout heading={category}>
-        <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
+      <Layout heading={categoryName}>
+        <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
           {articles.map((article, index) => (
-            <Article key={index} article={article} category={category} />
+            <Article
+              key={index}
+              article={article}
+              categoryName={categoryName}
+            />
           ))}
         </ul>
       </Layout>

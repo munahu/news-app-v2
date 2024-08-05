@@ -3,14 +3,14 @@
 import Image from "next/image";
 import { ArticleStructure } from "@/app/actions";
 import { useRouter } from "next/navigation";
-import { Category } from "../categories";
+import { CategoryName } from "@/app/categories";
 
 interface Props {
   article: ArticleStructure;
-  category: Category;
+  categoryName: CategoryName;
 }
 
-export default function Article({ article, category }: Props) {
+export default function Article({ article, categoryName }: Props) {
   const router = useRouter();
   const handleClick = () => {
     const storedViewedArticles = localStorage.getItem("articles");
@@ -21,7 +21,7 @@ export default function Article({ article, category }: Props) {
     } else {
       localStorage.setItem("articles", JSON.stringify([article]));
     }
-    router.push(`/${category}/${article.id}`);
+    router.push(`/${categoryName}/${article.id}`);
   };
   return (
     <li className="group cursor-pointer" onClick={() => handleClick()}>

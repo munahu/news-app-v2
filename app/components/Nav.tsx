@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { categories } from "../categories";
+import { categoryNames } from "../categories";
 
 interface Props {
   heading: string;
@@ -63,13 +63,13 @@ export default function Nav({ heading }: Props) {
             Home
           </Link>
         </li>
-        {categories.map((category, index) => (
+        {categoryNames.map((categoryName, index) => (
           <li key={index}>
             <Link
-              href={`/${category}`}
+              href={`/${categoryName}`}
               className="p-2 ml-4 text-sm opacity-90 font-light uppercase cursor-pointer"
             >
-              {category}
+              {categoryName}
             </Link>
           </li>
         ))}
@@ -91,13 +91,13 @@ function MobileNav({ heading }: MobileNavProps) {
           </Link>
         </li>
       )}
-      {categories.map((category, index) => (
+      {categoryNames.map((categoryName, index) => (
         <li key={index}>
           <Link
-            href={`/${category}`}
+            href={`/${categoryName}`}
             className="text-2xl uppercase py-4 flex items-center hover:line-through"
           >
-            {category}
+            {categoryName}
           </Link>
         </li>
       ))}

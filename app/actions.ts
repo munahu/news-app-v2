@@ -1,6 +1,6 @@
 import { unstable_noStore as noStore } from "next/cache";
-import { Category } from "./categories";
 import { v4 as uuidv4 } from "uuid";
+import { categories, CategoryName } from "./categories";
 
 export interface ArticleStructure {
   id: string;
@@ -10,20 +10,21 @@ export interface ArticleStructure {
   urlToImage: string;
 }
 
-export async function fetchArticles(category: Category, amount: string) {
-  const actualCategoryName =
-    category === "tech"
-      ? "technology"
-      : category === "culture"
-      ? "entertainment"
-      : category;
+export async function fetchArticles(
+  categoryName: CategoryName,
+  amount: string
+) {
+  const categoryDomains = categories.find(
+    (category) => category.name === categoryName
+  )?.domains;
 
-  noStore();
-  const res = await fetch(
-    `https://newsapi.org/v2/top-headlines?country=us&category=${actualCategoryName}&apiKey=${process.env.NEWS_API_KEY}&pageSize=${amount}`
+  const response = await fetch(
+    `https://newsapi.org/v2/everything?domains=${categoryDomains}&language=en&apiKey=${process.env.NEWS_API_KEY}&pageSize=${amount}`
   );
 
-  const data = await res.json();
+  const data = await response.json();
+
+  noStore();
 
   const articles: ArticleStructure[] = data.articles;
 
